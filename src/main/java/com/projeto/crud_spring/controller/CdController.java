@@ -1,5 +1,6 @@
 package com.projeto.crud_spring.controller;
 import com.projeto.crud_spring.domain.products.CD;
+import com.projeto.crud_spring.domain.products.DetailsCd;
 import com.projeto.crud_spring.repository.CdRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,11 @@ public class CdController {
     public ResponseEntity delete(@PathVariable Long id){
         cdRepository.deleteById(id);
         return ResponseEntity.status(204).build();
+    }
+    @GetMapping("/details/{id}")
+    public ResponseEntity Detalhar(@PathVariable Long id){
+        var cd = cdRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DetailsCd(cd));
     }
 
 }
