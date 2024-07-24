@@ -37,7 +37,7 @@ public class CdController {
 ////        return ResponseEntity.status(201).body().build();
 //    }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity create(@RequestBody CD CD){
         var agora = LocalDateTime.now();
         CD.setRegister_date(agora);
@@ -69,6 +69,7 @@ public class CdController {
     @DeleteMapping(path = {"/delete/{id}"})
     public ResponseEntity<?> delete(@PathVariable Long id){
         var username = userService.getAuthenticatedUser().getLogin();
+
         return cdRepository.findById(id)
                 .map(record -> {
                     if (!record.getUser().getLogin().equals(username)) {
