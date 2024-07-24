@@ -35,10 +35,19 @@ public class CdController {
         var course = cdRepository.findById(id).orElse(null);
         return ResponseEntity.status(200).body(course);
     }
-//    @PutMapping(value = "/{id}")
-//    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Course course){
-//        return ResponseEntity.status(200).body(courseRepository.save(course));
-//    }
+
+    @PutMapping(value = "/edit/{id}")
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody CD cd){
+        return cdRepository.findById(id)
+                .map(record -> {
+                    record.setName(cd.getName());
+                    record.setGenre(cd.getGenre());
+                    record.setAuthor(cd.getAuthor());
+                    CD updated = cdRepository.save(record);
+                    return ResponseEntity.ok().body(updated);
+                }).orElse(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping(path = {"/delete/{id}"})
     public ResponseEntity delete(@PathVariable Long id){
         cdRepository.deleteById(id);
@@ -52,28 +61,5 @@ public class CdController {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    //    @Bean
-//    CommandLineRunner initDatabase(){
-//        return args -> {
-//            courseRepository.deleteAll();
-//            Course C = new Course();
-//            C.setName("Java");
-//            C.setCategoria("Back-end");
-//
-//            courseRepository.save(C);
-//        };
-//    }
 
 
