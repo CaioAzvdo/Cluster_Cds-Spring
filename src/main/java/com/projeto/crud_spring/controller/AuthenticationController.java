@@ -1,6 +1,5 @@
 package com.projeto.crud_spring.controller;
 
-import com.projeto.crud_spring.domain.Course;
 import com.projeto.crud_spring.domain.user.AuthenticationDTO;
 import com.projeto.crud_spring.domain.user.LoginResponseDTO;
 import com.projeto.crud_spring.domain.user.RegisterDTO;
@@ -8,7 +7,6 @@ import com.projeto.crud_spring.domain.user.User;
 import com.projeto.crud_spring.infra.security.TokenService;
 import com.projeto.crud_spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

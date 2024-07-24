@@ -1,34 +1,37 @@
 package com.projeto.crud_spring.controller;
-import com.projeto.crud_spring.domain.Course;
-import com.projeto.crud_spring.repository.CourseRepository;
+import com.projeto.crud_spring.domain.products.CD;
+import com.projeto.crud_spring.repository.CdRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 //@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/cd")
 @AllArgsConstructor
 
-public class CoursesController {
+public class CdController {
 
-    private final CourseRepository courseRepository;
+    private final CdRepository cdRepository;
 
-    @GetMapping
-    public List<Course> list(){
-        return courseRepository.findAll();
+    @GetMapping("/list")
+    public List<CD> list(){
+        return cdRepository.findAll();
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Course course){
-        return ResponseEntity.status(201).body(courseRepository.save(course));
+    public ResponseEntity create(@RequestBody CD CD){
+        var agora = LocalDateTime.now();
+        CD.setRegister_date(agora);
+        return ResponseEntity.status(201).body(cdRepository.save(CD));
 //        courseRepository.save(course);
 //        return ResponseEntity.status(201).body().build();
     }
     @GetMapping(path = {"/{id}"})
     public ResponseEntity findById(@PathVariable Long id){
-        var course = courseRepository.findById(id).orElse(null);
+        var course = cdRepository.findById(id).orElse(null);
         return ResponseEntity.status(200).body(course);
     }
 //    @PutMapping(value = "/{id}")
@@ -37,7 +40,7 @@ public class CoursesController {
 //    }
     @DeleteMapping(path = {"/delete/{id}"})
     public ResponseEntity delete(@PathVariable Long id){
-        courseRepository.deleteById(id);
+        cdRepository.deleteById(id);
         return ResponseEntity.status(204).build();
     }
 
