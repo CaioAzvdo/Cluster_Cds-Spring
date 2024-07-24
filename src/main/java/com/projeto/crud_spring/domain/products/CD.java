@@ -1,5 +1,6 @@
 package com.projeto.crud_spring.domain.products;
 
+import com.projeto.crud_spring.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,6 +16,10 @@ public class CD {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "name", length = 200, nullable = false)
     private String name;
