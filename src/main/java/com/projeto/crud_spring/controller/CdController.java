@@ -5,6 +5,9 @@ import com.projeto.crud_spring.repository.CdRepository;
 import com.projeto.crud_spring.services.AuthorizationService;
 import com.projeto.crud_spring.services.UserServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -24,18 +27,10 @@ public class CdController {
     private UserServiceImpl userService;
 
     @GetMapping("/list")
-    public List<CD> list(){
-        return cdRepository.findAll();
+    public ResponseEntity<Page<DetailsCd>> list(@PageableDefault(size = 10, sort = {"name"}) Pageable paginacao){
+        var page = cdRepository.findAll(paginacao).map(DetailsCd::new);
+        return ResponseEntity.ok(page);
     }
-
-//    @PostMapping
-//    public ResponseEntity create(@RequestBody CD CD){
-//        var agora = LocalDateTime.now();
-//        CD.setRegister_date(agora);
-//        return ResponseEntity.status(201).body(cdRepository.save(CD));
-////        courseRepository.save(course);
-////        return ResponseEntity.status(201).body().build();
-//    }
 
     @PostMapping("/register")
     public ResponseEntity create(@RequestBody CD CD){
@@ -52,8 +47,6 @@ public class CdController {
     @PutMapping(value = "/edit/{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody CD cd){
         var username = userService.getAuthenticatedUser().getLogin();
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentPrincipalName = authentication.getName();
         return cdRepository.findById(id)
                 .map(record -> {
                     if (!record.getUser().getLogin().equals(username)) {
@@ -81,7 +74,13 @@ public class CdController {
     }
 
 
+    @GetMapping("/details/{id}")
+    public ResponseEntity Detalhar(@PathVariable Long id){
+        var cd = cdRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DetailsCd(cd));
+    }
 
+    //Metodos antigos sem verificação:
 
 //    @PutMapping(value = "/edit/{id}")
 //    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody CD cd){
@@ -100,16 +99,14 @@ public class CdController {
 //        cdRepository.deleteById(id);
 //        return ResponseEntity.status(204).build();
 //    }
-
-
-
-    @GetMapping("/details/{id}")
-    public ResponseEntity Detalhar(@PathVariable Long id){
-        var cd = cdRepository.getReferenceById(id);
-        return ResponseEntity.ok(new DetailsCd(cd));
-    }
-
-
+    //    @PostMapping
+//    public ResponseEntity create(@RequestBody CD CD){
+//        var agora = LocalDateTime.now();
+//        CD.setRegister_date(agora);
+//        return ResponseEntity.status(201).body(cdRepository.save(CD));
+////        courseRepository.save(course);
+////        return ResponseEntity.status(201).body().build();
+//    }
 
 }
 

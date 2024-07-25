@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CdRepository extends JpaRepository<CD, Long> {
+    void deleteByName(String name);
+    void deleteAllByAuthor(String author);
 
 }
