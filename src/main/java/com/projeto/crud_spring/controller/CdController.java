@@ -36,8 +36,9 @@ public class CdController {
     public ResponseEntity create(@RequestBody CD CD){
         var agora = LocalDateTime.now();
         CD.setRegister_date(agora);
-        CD.setUser(userService.getAuthenticatedUser()); // userService.getAuthenticatedUser() é um método hipotético que retorna o usuário autenticado
-        return ResponseEntity.status(201).body(cdRepository.save(CD));
+        CD.setUser(userService.getAuthenticatedUser());
+        cdRepository.save(CD);   // userService.getAuthenticatedUser() é um método hipotético que retorna o usuário autenticado
+        return ResponseEntity.status(201).body(new DetailsCd(CD) );
 }
     @GetMapping(path = {"/{id}"})
     public ResponseEntity findById(@PathVariable Long id){
