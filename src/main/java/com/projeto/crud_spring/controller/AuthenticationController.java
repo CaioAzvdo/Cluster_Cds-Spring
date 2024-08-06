@@ -48,10 +48,11 @@ public class AuthenticationController {
         if(this.userRepository.findByLogin(data.login()) != null){return ResponseEntity.badRequest().body("User already exists");}
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newuser = new User(data.login(), encryptedPassword, data.role());
+        User newuser = new User(data.login(), encryptedPassword, data.email(), data.role());
 
         this.userRepository.save(newuser);
         return ResponseEntity.ok("User created");
 
     }
+
 }
