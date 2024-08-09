@@ -41,7 +41,7 @@ public class AdminCdController {
     @DeleteMapping(path="/deleteAllByAuthor/{author}")
     @Transactional
     public ResponseEntity deleteAllByAuthor(@PathVariable String author){
-        cdRepository.deleteAllByAuthor(author);
+        cdRepository.deleteAllByAuthorCustomQuery(author);
         return ResponseEntity.status(204).build();
     }
 }
