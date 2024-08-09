@@ -1,5 +1,6 @@
 package com.projeto.crud_spring.controller;
 
+import com.projeto.crud_spring.domain.products.DetailsCd;
 import com.projeto.crud_spring.domain.user.AuthenticationDTO;
 import com.projeto.crud_spring.domain.user.LoginResponseDTO;
 import com.projeto.crud_spring.domain.user.RegisterDTO;
@@ -7,6 +8,9 @@ import com.projeto.crud_spring.domain.user.User;
 import com.projeto.crud_spring.infra.security.TokenService;
 import com.projeto.crud_spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,8 +42,9 @@ public class AuthenticationController {
 
     }
     @GetMapping("/list")
-    public List<User> list(){
-        return userRepository.findAll();
+    public ResponseEntity<Page<DetailsUser>> list(@PageableDefault(size = 10, sort = {"name"}) Pageable paginacao){
+        var page = userRepository.findAll(paginacao).map(DetailsUser::new);
+        return ResponseEntity.ok(page);
     }
 
 
