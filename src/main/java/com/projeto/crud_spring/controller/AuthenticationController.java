@@ -41,11 +41,11 @@ public class AuthenticationController {
         return ResponseEntity.ok(new LoginResponseDTO(token));
 
     }
-    @GetMapping("/list")
-    public ResponseEntity<Page<DetailsUser>> list(@PageableDefault(size = 10, sort = {"name"}) Pageable paginacao){
-        var page = userRepository.findAll(paginacao).map(DetailsUser::new);
-        return ResponseEntity.ok(page);
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity<Page<DetailsUser>> list(@PageableDefault(size = 10, sort = {"name"}) Pageable paginacao){
+//        var page = userRepository.findAll(paginacao).map(DetailsUser::new);
+//        return ResponseEntity.ok(page);
+//    }
 
 
     @PostMapping("/register")

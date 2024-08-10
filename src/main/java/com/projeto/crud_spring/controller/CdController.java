@@ -80,6 +80,12 @@ public class CdController {
         var cd = cdRepository.getReferenceById(id);
         return ResponseEntity.ok(new DetailsCd(cd));
     }
+    @GetMapping("/listAuthor/{author}")
+    public ResponseEntity<Page<DetailsCd>> listAuthor(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable, @PathVariable String author) {
+        var cds = cdRepository.findAllByAuthor(author, pageable).map(DetailsCd::new);
+        return ResponseEntity.ok(cds);
+    }
+
 
     //Metodos antigos sem verificação:
 
