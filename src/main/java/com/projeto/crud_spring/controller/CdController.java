@@ -85,6 +85,15 @@ public class CdController {
         var cds = cdRepository.findAllByAuthor(author, pageable).map(DetailsCd::new);
         return ResponseEntity.ok(cds);
     }
+    @DeleteMapping("/deleteAllByAuthor/{author}")
+    public ResponseEntity<?> deleteAllByAuthor(@PathVariable String author) {
+        var cds = listAuthor(Pageable.unpaged(), author).getBody();
+        if (cds != null) {
+            cds.forEach(cd -> cdRepository.deleteById(cd.getId()));
+        }
+        return ResponseEntity.status(204).build();
+    }
+}
 
 
     //Metodos antigos sem verificação:
@@ -115,7 +124,7 @@ public class CdController {
 ////        return ResponseEntity.status(201).body().build();
 //    }
 
-}
+
 
 
 

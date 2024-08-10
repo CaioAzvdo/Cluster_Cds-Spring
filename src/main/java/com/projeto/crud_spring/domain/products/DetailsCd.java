@@ -6,4 +6,8 @@ public record DetailsCd(Long id,String userLogin ,String name, String genre, Str
     public DetailsCd(CD cd) {
         this(cd.getId(),cd.getUser().getUsername(),cd.getName(), cd.getGenre(), cd.getAuthor(), cd.getRegister_date().toString());
     }
+
+    public Long getId() {
+        return id;
+    }
 }
