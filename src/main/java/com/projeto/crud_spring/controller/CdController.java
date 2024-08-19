@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-//@CrossOrigin(origins = "http://localhost:4200")
+//@CrsOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/cd")
 @AllArgsConstructor
@@ -31,7 +31,6 @@ public class CdController {
         var page = cdRepository.findAll(paginacao).map(DetailsCd::new);
         return ResponseEntity.ok(page);
     }
-
     @PostMapping("/register")
     public ResponseEntity create(@RequestBody CD CD){
         var agora = LocalDateTime.now();

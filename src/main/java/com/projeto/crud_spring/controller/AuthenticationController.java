@@ -1,6 +1,4 @@
 package com.projeto.crud_spring.controller;
-
-import com.projeto.crud_spring.domain.products.DetailsCd;
 import com.projeto.crud_spring.domain.user.AuthenticationDTO;
 import com.projeto.crud_spring.domain.user.LoginResponseDTO;
 import com.projeto.crud_spring.domain.user.RegisterDTO;
@@ -36,9 +34,12 @@ public class AuthenticationController {
         var UsernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = authenticationManager.authenticate(UsernamePassword);
 
-        var token = tokenService.generateToken(User.class.cast(auth.getPrincipal()));
+        var user = (User) auth.getPrincipal();
+        var token = tokenService.generateToken(user);
+        var role = user.getRole();
+        //var token = tokenService.generateToken(User.class.cast(auth.getPrincipal()));
 
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        return ResponseEntity.ok(new LoginResponseDTO(token, role));
 
     }
 //    @GetMapping("/list")
