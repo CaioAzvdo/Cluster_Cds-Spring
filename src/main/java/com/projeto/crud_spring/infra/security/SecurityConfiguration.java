@@ -34,6 +34,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/admin/deleteAllByAuthor/").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/auth/list").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cd/list").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cd/listAll").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/list").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cd/register").permitAll()
 //                        .requestMatchers(HttpMethod.POST, "/cd").hasRole("ADMIN")

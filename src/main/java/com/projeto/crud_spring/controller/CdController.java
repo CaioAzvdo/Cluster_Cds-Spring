@@ -31,6 +31,12 @@ public class CdController {
         var page = cdRepository.findAll(paginacao).map(DetailsCd::new);
         return ResponseEntity.ok(page);
     }
+    @GetMapping("/listAll")
+    public ResponseEntity<List<DetailsCd>> listAll(){
+        var cds = cdRepository.findAll().stream().map(DetailsCd::new);
+        return ResponseEntity.ok(cds.toList());
+    }
+
     @PostMapping("/register")
     public ResponseEntity create(@RequestBody CD CD){
         var agora = LocalDateTime.now();
