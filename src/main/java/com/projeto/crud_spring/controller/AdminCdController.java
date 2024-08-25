@@ -44,4 +44,15 @@ public class AdminCdController {
         cdRepository.deleteAllByAuthorCustomQuery(author);
         return ResponseEntity.status(204).build();
     }
+    @PutMapping(value = "/edit/{id}")
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody CD cd){
+        return cdRepository.findById(id)
+                .map(record -> {
+                    record.setName(cd.getName());
+                    record.setGenre(cd.getGenre());
+                    record.setAuthor(cd.getAuthor());
+                    CD updated = cdRepository.save(record);
+                    return ResponseEntity.ok().body(updated);
+                }).orElse(ResponseEntity.notFound().build());
+    }
 }

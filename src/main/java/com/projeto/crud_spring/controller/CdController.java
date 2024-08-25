@@ -62,7 +62,8 @@ public class CdController {
                     record.setGenre(cd.getGenre());
                     record.setAuthor(cd.getAuthor());
                     CD updated = cdRepository.save(record);
-                    return ResponseEntity.ok().body(updated);
+
+                    return ResponseEntity.ok().body("updated");
                 }).orElse(ResponseEntity.notFound().build());
     }
     @DeleteMapping(path = {"/delete/{id}"})
