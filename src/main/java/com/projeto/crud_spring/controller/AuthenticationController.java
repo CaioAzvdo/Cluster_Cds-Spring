@@ -37,9 +37,10 @@ public class AuthenticationController {
         var user = (User) auth.getPrincipal();
         var token = tokenService.generateToken(user);
         var role = user.getRole();
+        var login = user.getLogin();
         //var token = tokenService.generateToken(User.class.cast(auth.getPrincipal()));
 
-        return ResponseEntity.ok(new LoginResponseDTO(token, role));
+        return ResponseEntity.ok(new LoginResponseDTO(token, role, login));
 
     }
 //    @GetMapping("/list")
