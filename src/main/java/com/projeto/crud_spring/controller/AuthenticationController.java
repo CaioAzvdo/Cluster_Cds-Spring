@@ -1,8 +1,5 @@
 package com.projeto.crud_spring.controller;
-import com.projeto.crud_spring.domain.user.AuthenticationDTO;
-import com.projeto.crud_spring.domain.user.LoginResponseDTO;
-import com.projeto.crud_spring.domain.user.RegisterDTO;
-import com.projeto.crud_spring.domain.user.User;
+import com.projeto.crud_spring.domain.user.*;
 import com.projeto.crud_spring.infra.security.TokenService;
 import com.projeto.crud_spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +53,18 @@ public class AuthenticationController {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newuser = new User(data.login(), encryptedPassword, data.email(), data.role());
+
+        this.userRepository.save(newuser);
+        return ResponseEntity.ok("User created");
+
+    }
+
+    @PostMapping("/registeruser")
+    public ResponseEntity registerUser(@RequestBody @Validated RegisterUserDTO data) {
+        if(this.userRepository.findByLogin(data.login()) != null){return ResponseEntity.badRequest().body("User already exists");}
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+        User newuser = new User(data.login(), encryptedPassword, data.email(), UserRole.USER);
 
         this.userRepository.save(newuser);
         return ResponseEntity.ok("User created");
