@@ -1,4 +1,11 @@
-ALTER TABLE `project_cds`.`users`
-    ADD COLUMN `email` VARCHAR(45) NOT NULL AFTER `role`,
-CHANGE COLUMN `password` `password` VARCHAR(255) NOT NULL ,
-CHANGE COLUMN `role` `role` TINYINT NOT NULL ;
+ALTER TABLE users
+    ADD COLUMN email VARCHAR(45) NOT NULL;
+
+ALTER TABLE users
+ALTER COLUMN password TYPE VARCHAR(255);
+
+ALTER TABLE users
+    ALTER COLUMN password SET NOT NULL;
+
+ALTER TABLE users
+ALTER COLUMN role TYPE SMALLINT USING role::smallint;

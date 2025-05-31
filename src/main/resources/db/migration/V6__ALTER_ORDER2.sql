@@ -1,2 +1,5 @@
-ALTER TABLE `project_cds`.`users`
-    CHANGE COLUMN `password` `password` VARCHAR(255) NOT NULL AFTER `login`;
+ALTER TABLE users
+ALTER COLUMN password TYPE VARCHAR(255);
+
+ALTER TABLE users
+    ALTER COLUMN password SET NOT NULL;
