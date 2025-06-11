@@ -17,7 +17,7 @@ jobs:
       - name: Build project
         run: mvn clean install -DskipTests
       - name: Login DockeHub
-        run: echo ${{secrets.DOCKER_PASSWORD}} | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
+        run: echo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}} --password-stdin
       - name: Docker Image
         run: docker build -t caiomotoboy/deploy_ghactions-1.0.0.jar .
       - name: Push Image Docker
