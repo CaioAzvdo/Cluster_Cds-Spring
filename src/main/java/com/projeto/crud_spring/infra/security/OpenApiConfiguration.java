@@ -25,6 +25,6 @@ public class OpenApiConfiguration implements WebMvcConfigurer {
                         .title("Cluster Cds CRUD API")
                         .version("1.0.0")
                         .description("Api for managing Cds in a CRUD application")
-                        .contact(new Contact().name("Caio Azevedo").url("linkedin.com/in/caio-azevedo-670b70213/")));
+                        .contact(new Contact().name("Caio Azevedo").email("caioazevedodourado8@gmail.com")));
     }
 }
