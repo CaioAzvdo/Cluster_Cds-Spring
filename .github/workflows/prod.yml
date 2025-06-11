@@ -1,0 +1,11 @@
+name: Deploy to Production
+on:
+  push:
+    branches: [deploy-github-actions]
+
+jobs:
+  build:
+    runs-on: ubuntu-
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
