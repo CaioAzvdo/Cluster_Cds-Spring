@@ -22,9 +22,9 @@ public class OpenApiConfiguration implements WebMvcConfigurer {
     public io.swagger.v3.oas.models.OpenAPI customOpenAPI() {
         return new io.swagger.v3.oas.models.OpenAPI()
                 .info(new Info()
-                        .title("API Title")
+                        .title("Cluster Cds CRUD API")
                         .version("1.0.0")
-                        .description("API Description")
-                        .contact(new Contact().name("Your Name").email("your.email@example.com")));
+                        .description("Api for managing Cds in a CRUD application")
+                        .contact(new Contact().name("Caio Azevedo").url("linkedin.com/in/caio-azevedo-670b70213/")));
     }
 }

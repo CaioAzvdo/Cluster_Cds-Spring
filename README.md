@@ -4,3 +4,5 @@ agente Administrador tem autorização para manter o sistema como um todo.
 - Foram utilizadas nesta aplicação as seguintes tecnologias para o desenvolvimento do back-end: Spring boot 3.3.0 , Spring data, Spring security, Java 17, Lombok Library, Jwt, Flyway 10.15.0, MySql containerizado com Docker e Insomina para teste e documentação da Api.
 - Foram utilizadas nesta aplicação as seguintes tecnologias para o desenvolvimento do front-end: JavaScript, Angular com Authguard e Bootstrap
 - Link do código do Front: (https://github.com/CaioAzvdo/Cluster_Cds-AngularV10)
+- Documentação de como foi feito o deploy: [Github Actions + AWS](docs/deploy.md)
+- Link para testar a aplicação: [Cluster_Cds](http://ec2-18-117-152-247.us-east-2.compute.amazonaws.com:8080/swagger-ui/index.html)
