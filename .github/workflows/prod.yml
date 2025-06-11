@@ -8,4 +8,17 @@ jobs:
     runs-on: ubuntu-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name: Build project
+        run: mvn clean install -DskipTests
+      - name: Login DockeHub
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+      - name: Docker Image
+        run: docker build -t caiomotoboy/deploy_ghactions-1.0.0.jar .
+      - name: Push Image Docker
+        run: docker push caiomotoboy/deploy_ghactions-1.0.0.jar
