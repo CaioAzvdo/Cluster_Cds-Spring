@@ -33,6 +33,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Pull docker image
-        run: docker pull caiomotoboy/deploy_ghactions
+        run: sudo docker pull caiomotoboy/deploy_ghactions
       - name: Run docker container
-        run: docker run -d --name deploy_ghactions -p 8080:8080 caiomotoboy/deploy_ghactions
+        run: sudo docker run -d --name deploy_ghactions -p 8080:8080 caiomotoboy/deploy_ghactions
