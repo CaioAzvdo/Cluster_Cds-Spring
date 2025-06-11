@@ -35,4 +35,4 @@ jobs:
       - name: Pull docker image
         run: sudo docker pull caiomotoboy/deploy_ghactions
       - name: Run docker container
-        run: sudo docker run -d --name deploy_ghactions -p 8080:8080 caiomotoboy/deploy_ghactions
+        run: sudo docker run -d --name deploy_ghactions -p 8080:8080 -e DATABASE_USER=${{secrets.DATABASE_USER}} -e DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}} -e DATABASE_URL=${{secrets.DATABASE_URL}} caiomotoboy/deploy_ghactions
